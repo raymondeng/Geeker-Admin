@@ -10,11 +10,19 @@ export const staticRouter: RouteRecordRaw[] = [
     redirect: HOME_URL
   },
   {
-    path: LOGIN_URL,
+    path: "/login",
     name: "login",
-    component: () => import("@/views/login/index.vue"),
+    component: () => import("@/views/login/login/index.vue"),
     meta: {
       title: "登录"
+    }
+  },
+  {
+    path: LOGIN_URL,
+    name: "loginByMobile",
+    component: () => import("@/views/login/loginByMobile/index.vue"),
+    meta: {
+      title: "手机号码登录"
     }
   },
   {

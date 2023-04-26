@@ -1,13 +1,13 @@
 {
-  "name": "geeker-admin",
+  "name": "ssap-admin",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "geeker-admin open source management system",
+  "description": "ssap-admin open source management system",
   "author": {
-    "name": "Geeker",
-    "email": "848130454@qq.com",
-    "url": "https://github.com/HalseySpicy"
+    "name": "raymond deng",
+    "email": "raymond_deng@outlook.com",
+    "url": "https://github.com/raymond_deng"
   },
   "license": "MIT",
   "homepage": "https://github.com/HalseySpicy/Geeker-Admin",

@@ -4,8 +4,8 @@
     <el-header>
       <div class="header-lf">
         <div class="logo flx-center">
-          <img class="logo-img" src="@/assets/images/logo.svg" alt="logo" />
-          <span class="logo-text">Geeker Admin</span>
+          <!-- <img class="logo-img" src="@/assets/images/logo.svg" alt="logo" /> -->
+          <span class="logo-text">管理平台</span>
         </div>
         <ToolBarLeft />
       </div>
