@@ -14,6 +14,7 @@ import { useGlobalStore } from "@/stores/modules/global";
 
 import en from "element-plus/es/locale/lang/en";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
+import zhTw from "element-plus/es/locale/lang/zh-tw";
 
 const globalStore = useGlobalStore();
 
@@ -31,9 +32,10 @@ onMounted(() => {
 
 // element language
 const locale = computed(() => {
-  if (globalStore.language == "zh") return zhCn;
+  if (globalStore.language == "zhCn") return zhCn;
+  if (globalStore.language == "zhTw") return zhTw;
   if (globalStore.language == "en") return en;
-  return getBrowserLang() == "zh" ? zhCn : en;
+  return getBrowserLang() == "zhCn" ? zhCn : en;
 });
 
 // element assemblySize

@@ -1,7 +1,8 @@
 import { createI18n } from "vue-i18n";
 import { getBrowserLang } from "@/utils";
 
-import zh from "./modules/zh";
+import zhCn from "./modules/zh-cn";
+import zhTw from "./modules/zh-tw";
 import en from "./modules/en";
 
 const i18n = createI18n({
@@ -10,7 +11,8 @@ const i18n = createI18n({
   legacy: false,
   locale: getBrowserLang(),
   messages: {
-    zh,
+    zhCn,
+    zhTw,
     en
   }
 });
