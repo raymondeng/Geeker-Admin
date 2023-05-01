@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, InternalAxiosRequ
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
 import { LOGIN_URL } from "@/config";
 import { ElMessage } from "element-plus";
-import { ResultData } from "@/api/interface";
+import { ResultData } from "@/api/interface/mock";
 import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
 import { useUserStore } from "@/stores/modules/user";
@@ -92,17 +92,20 @@ class RequestHttp {
   get<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
     return this.service.get(url, { params, ..._object });
   }
-  post<T>(url: string, params?: object | string, _object = {}): Promise<ResultData<T>> {
-    return this.service.post(url, params, _object);
+  post<T>(url: string, data?: object | string, _object = {}): Promise<ResultData<T>> {
+    return this.service.post(url, data, _object);
   }
-  put<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
-    return this.service.put(url, params, _object);
+  put<T>(url: string, data?: object, _object = {}): Promise<ResultData<T>> {
+    return this.service.put(url, data, _object);
   }
   delete<T>(url: string, params?: any, _object = {}): Promise<ResultData<T>> {
     return this.service.delete(url, { params, ..._object });
   }
-  download(url: string, params?: object, _object = {}): Promise<BlobPart> {
-    return this.service.post(url, params, { ..._object, responseType: "blob" });
+  postDownload(url: string, data?: object, _object = {}): Promise<BlobPart> {
+    return this.service.post(url, data, { ..._object, responseType: "blob" });
+  }
+  getDownload(url: string, params?: object, _object = {}): Promise<BlobPart> {
+    return this.service.get(url, { params, ..._object, responseType: "blob" });
   }
 }
 

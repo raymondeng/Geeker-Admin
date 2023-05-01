@@ -1,36 +1,54 @@
-import { SsapLogin } from "@/api/interface/auth/login";
-import { PORT2 } from "@/api/config/servicePort";
+import { Login } from "@/api/interface/auth/login";
+import { PORT1 } from "@/api/config/servicePort";
+import { APPID } from "@/config/app";
 import authMenuList from "@/assets/json/authMenuList.json";
 import authButtonList from "@/assets/json/authButtonList.json";
 import http from "@/api";
+
+const api = {
+  LoginByWxWork: PORT1 + "/auth/login-by-wx-work",
+  LoginByMobile: PORT1 + "/auth/login-by-mobile",
+  GetCurStudent: PORT1 + "/auth/get-cur-student",
+  Logout: PORT1 + "/auth/logout",
+  UserInfo: PORT1 + "/auth/user-info"
+};
 
 /**
  * @name 登录模块
  */
 // 用户登录
-export const loginApi = (params: SsapLogin.ReqLoginForm) => {
-  return http.post<SsapLogin.ResLogin>(PORT2 + `/login`, params, { noLoading: true }); // 正常 post json 请求  ==>  application/json
-  // return http.post<Login.ResLogin>(PORT2 + `/login`, params, { noLoading: true }); // 控制当前请求不显示 loading
-  // return http.post<Login.ResLogin>(PORT2 + `/login`, {}, { params }); // post 请求携带 query 参数  ==>  ?username=admin&password=123456
-  // return http.post<Login.ResLogin>(PORT2 + `/login`, qs.stringify(params)); // post 请求携带表单参数  ==>  application/x-www-form-urlencoded
-  // return http.get<Login.ResLogin>(PORT2 + `/login?${qs.stringify(params, { arrayFormat: "repeat" })}`); // get 请求可以携带数组等复杂参数
+export const loginByWxWorkApi = (params: Login.ReqLoginByWxWorkForm) => {
+  return http.post<Login.ResLogin>(api.LoginByWxWork, params, { noLoading: true }); // 正常 post json 请求  ==>  application/json
+  // return http.post<Login.ResLogin>(PORT1 + `/login`, params, { noLoading: true }); // 控制当前请求不显示 loading
+  // return http.post<Login.ResLogin>(PORT1 + `/login`, {}, { params }); // post 请求携带 query 参数  ==>  ?username=admin&password=123456
+  // return http.post<Login.ResLogin>(PORT1 + `/login`, qs.stringify(params)); // post 请求携带表单参数  ==>  application/x-www-form-urlencoded
+  // return http.get<Login.ResLogin>(PORT1 + `/login?${qs.stringify(params, { arrayFormat: "repeat" })}`); // get 请求可以携带数组等复杂参数
+};
+
+// 用户登录
+export const loginByMobileApi = (params: Login.ReqLoginByMobileForm) => {
+  return http.post<Login.ResLogin>(PORT1 + `/login-by-mobile`, { params, app_id: APPID }, { noLoading: true }); // 正常 post json 请求  ==>  application/json
+  // return http.post<Login.ResLogin>(PORT1 + `/login`, params, { noLoading: true }); // 控制当前请求不显示 loading
+  // return http.post<Login.ResLogin>(PORT1 + `/login`, {}, { params }); // post 请求携带 query 参数  ==>  ?username=admin&password=123456
+  // return http.post<Login.ResLogin>(PORT1 + `/login`, qs.stringify(params)); // post 请求携带表单参数  ==>  application/x-www-form-urlencoded
+  // return http.get<Login.ResLogin>(PORT1 + `/login?${qs.stringify(params, { arrayFormat: "repeat" })}`); // get 请求可以携带数组等复杂参数
 };
 
 // 获取菜单列表
 export const getAuthMenuListApi = () => {
-  return http.get<Menu.MenuOptions[]>(PORT2 + `/menu/list`, {}, { noLoading: true });
+  return http.get<Menu.MenuOptions[]>(PORT1 + `/menu/list`, {}, { noLoading: true });
   // 如果想让菜单变为本地数据，注释上一行代码，并引入本地 authMenuList.json 数据
   return authMenuList;
 };
 
 // 获取按钮权限
 export const getAuthButtonListApi = () => {
-  return http.get<SsapLogin.ResAuthButtons>(PORT2 + `/auth/buttons`, {}, { noLoading: true });
+  return http.get<Login.ResAuthButtons>(PORT1 + `/auth/buttons`, {}, { noLoading: true });
   // 如果想让按钮权限变为本地数据，注释上一行代码，并引入本地 authButtonList.json 数据
   return authButtonList;
 };
 
 // 用户户退出登录
 export const logoutApi = () => {
-  return http.post(PORT2 + `/logout`);
+  return http.post(PORT1 + `/logout`);
 };

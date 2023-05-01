@@ -1,4 +1,4 @@
-import { ResPage, User } from "@/api/interface/index";
+import { ResPage, User } from "@/api/interface/mock/index";
 import { PORT2 } from "@/api/config/servicePort";
 import http from "@/api";
 
@@ -47,7 +47,7 @@ export const resetUserPassWord = (params: { id: string }) => {
 
 // 导出用户数据
 export const exportUserInfo = (params: User.ReqUserParams) => {
-  return http.download(PORT2 + `/user/export`, params);
+  return http.postDownload(PORT2 + `/user/export`, params);
 };
 
 // 获取用户状态

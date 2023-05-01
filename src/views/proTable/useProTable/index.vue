@@ -50,7 +50,7 @@
 <script setup lang="tsx" name="useProTable">
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { User } from "@/api/interface";
+import { User } from "@/api/interface/mock";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
@@ -71,7 +71,7 @@ import {
   BatchAddUser,
   getUserStatus,
   getUserGender
-} from "@/api/modules/user";
+} from "@/api/modules/mock/user";
 
 const router = useRouter();
 
