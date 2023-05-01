@@ -10,14 +10,14 @@
           <!-- <img class="login-icon" src="@/assets/images/logo.svg" alt="" /> -->
           <h2 class="logo-text">管理平台</h2>
         </div>
-        <LoginForm />
+        <LoginByMobileForm />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="login">
-import LoginForm from "./components/LoginForm.vue";
+import LoginByMobileForm from "./components/LoginByMobileForm.vue";
 import SwitchDark from "@/components/SwitchDark/index.vue";
 </script>
 

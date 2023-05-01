@@ -27,7 +27,7 @@ import directives from "@/directives/index";
 // vue Router
 import router from "@/routers";
 // vue i18n
-import I18n from "@/languages/index";
+import i18n from "@/languages/index";
 // pinia store
 import pinia from "@/stores";
 // errorHandler
@@ -42,4 +42,4 @@ Object.keys(Icons).forEach(key => {
   app.component(key, Icons[key as keyof typeof Icons]);
 });
 
-app.use(ElementPlus).use(directives).use(router).use(I18n).use(pinia).mount("#app");
+app.use(ElementPlus).use(directives).use(router).use(i18n).use(pinia).mount("#app");

@@ -2,9 +2,9 @@ import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, InternalAxiosRequ
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
 import { LOGIN_URL } from "@/config";
 import { ElMessage } from "element-plus";
-import { ResultData } from "@/api/interface/mock";
+import { ResultData } from "@/api/interface";
 import { ResultEnum } from "@/enums/httpEnum";
-import { checkStatus } from "./helper/checkStatus";
+import { checkStatus } from "@/api/helper/checkStatus";
 import { useUserStore } from "@/stores/modules/user";
 import router from "@/routers";
 

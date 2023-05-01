@@ -1,11 +1,11 @@
 // 请求响应参数（不包含data）
-export interface Result {
+export interface MockResult {
   code: string;
   msg: string;
 }
 
 // 请求响应参数（包含data）
-export interface ResultData<T = any> extends Result {
+export interface MockResultData<T = any> extends MockResult {
   data: T;
 }
 

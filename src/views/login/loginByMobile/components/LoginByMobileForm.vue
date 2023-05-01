@@ -1,14 +1,20 @@
 <template>
   <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
     <el-form-item prop="username">
-      <el-input v-model="loginForm.username" placeholder="用户名：admin / user">
+      <el-input v-model="loginForm.mobile" placeholder="手机号码">
         <template #prefix>
           <el-icon class="el-input__icon"><user /></el-icon>
         </template>
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input type="password" v-model="loginForm.password" placeholder="密码：123456" show-password autocomplete="new-password">
+      <el-input
+        type="password"
+        v-model="loginForm.captcha"
+        placeholder="验证码：123456"
+        show-password
+        autocomplete="new-password"
+      >
         <template #prefix>
           <el-icon class="el-input__icon"><lock /></el-icon>
         </template>
@@ -25,20 +31,22 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { ElMessage } from "element-plus";
 import { HOME_URL } from "@/config";
 import { getTimeState } from "@/utils";
-import { Login } from "@/api/interface/mock";
+import i18n from "@/languages/index";
+import { Login } from "@/api/interface/auth/login";
 import { ElNotification } from "element-plus";
-import { loginApi } from "@/api/modules/mock/login";
+import { loginByMobileApi } from "@/api/modules/auth/login";
 import { useUserStore } from "@/stores/modules/user";
 import { useTabsStore } from "@/stores/modules/tabs";
 import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
-import md5 from "js-md5";
 
+const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const tabsStore = useTabsStore();
@@ -52,9 +60,11 @@ const loginRules = reactive({
 });
 
 const loading = ref(false);
-const loginForm = reactive<Login.ReqLoginForm>({
-  username: "",
-  password: ""
+const loginForm = reactive<Login.ReqLoginByMobileForm>({
+  school_id: "",
+  role: "teacher",
+  mobile: "",
+  captcha: "123456"
 });
 
 // login
@@ -65,8 +75,9 @@ const login = (formEl: FormInstance | undefined) => {
     loading.value = true;
     try {
       // 1.执行登录接口
-      const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
-      userStore.setToken(data.access_token);
+      const { result } = await loginByMobileApi(loginForm);
+      console.log(result);
+      userStore.setToken(result.access_token);
 
       // 2.添加动态路由
       await initDynamicRouter();
@@ -96,6 +107,12 @@ const resetForm = (formEl: FormInstance | undefined) => {
 };
 
 onMounted(() => {
+  const schoolId = route.query?.schoolId;
+  if (!schoolId) {
+    const missParamErrorText = i18n.global.t("message.missParamSchoolId");
+    ElMessage.error(`${missParamErrorText}`);
+    console.log(schoolId);
+  }
   // 监听 enter 事件（调用登录）
   document.onkeydown = (e: KeyboardEvent) => {
     e = (window.event as KeyboardEvent) || e;

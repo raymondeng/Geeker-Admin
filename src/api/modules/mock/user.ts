@@ -1,6 +1,6 @@
 import { ResPage, User } from "@/api/interface/mock/index";
 import { PORT2 } from "@/api/config/servicePort";
-import http from "@/api";
+import http from "./request";
 
 /**
  * @name 用户管理模块

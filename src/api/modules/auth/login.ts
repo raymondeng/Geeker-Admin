@@ -3,7 +3,7 @@ import { PORT1 } from "@/api/config/servicePort";
 import { APPID } from "@/config/app";
 import authMenuList from "@/assets/json/authMenuList.json";
 import authButtonList from "@/assets/json/authButtonList.json";
-import http from "@/api";
+import http from "@/utils/request";
 
 const api = {
   LoginByWxWork: PORT1 + "/auth/login-by-wx-work",

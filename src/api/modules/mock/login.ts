@@ -2,7 +2,7 @@ import { Login } from "@/api/interface/mock/index";
 import { PORT2 } from "@/api/config/servicePort";
 import authMenuList from "@/assets/json/authMenuList.json";
 import authButtonList from "@/assets/json/authButtonList.json";
-import http from "@/api";
+import http from "./request";
 
 /**
  * @name 登录模块
