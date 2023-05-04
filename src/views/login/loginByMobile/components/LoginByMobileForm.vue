@@ -55,8 +55,8 @@ const keepAliveStore = useKeepAliveStore();
 type FormInstance = InstanceType<typeof ElForm>;
 const loginFormRef = ref<FormInstance>();
 const loginRules = reactive({
-  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+  mobile: [{ required: true, message: "请输入手机号码", trigger: "blur" }],
+  captcha: [{ required: true, message: "请输入验证码", trigger: "blur" }]
 });
 
 const loading = ref(false);
@@ -107,12 +107,14 @@ const resetForm = (formEl: FormInstance | undefined) => {
 };
 
 onMounted(() => {
+  console.log(process.env.NODE_ENV);
   const schoolId = route.query?.schoolId;
+  console.log(schoolId);
   if (!schoolId) {
     const missParamErrorText = i18n.global.t("message.missParamSchoolId");
     ElMessage.error(`${missParamErrorText}`);
-    console.log(schoolId);
   }
+  loginForm.school_id = schoolId as string;
   // 监听 enter 事件（调用登录）
   document.onkeydown = (e: KeyboardEvent) => {
     e = (window.event as KeyboardEvent) || e;

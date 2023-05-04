@@ -4,9 +4,9 @@ import enLocale from "element-plus/lib/locale/lang/en";
 import zhCnLocale from "element-plus/lib/locale/lang/zh-cn";
 import zhTwLocale from "element-plus/lib/locale/lang/zh-tw";
 
-import nextEn from "./modules/en";
-import nextZhCn from "./modules/zh-cn";
-import nextZhTw from "./modules/zh-tw";
+import nextEn from "./base/en";
+import nextZhCn from "./base/zh-cn";
+import nextZhTw from "./base/zh-tw";
 
 import pagesLoginZhCn from "./pages/login/zh-cn";
 import pagesLoginEn from "./pages/login/en";
